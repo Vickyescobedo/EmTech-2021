@@ -1,8 +1,6 @@
 #Para poder entrar con login se debe hacer una lista con los usuarios que entraran al programa y para tener control deesta ista se deberá contar con una persona adminictradora con el usuario y clave para ingresar o eliminar personas en esta lista
 
 
-#if __name__ == "__main__":
-
 USUARIO = 'administrador'
 CONTRASENA = 'hola'
 
@@ -74,14 +72,14 @@ if username==USUARIO:
 
         x=1
         n=-1
-        lifestore_products_copia=list(lifestore_products)
+        lifestore_products_copia=list(lifestore_products)#se hace una copia de la lista para poder eleiminar la posición y obtener el producto
         lista_contadora_copia=list(lista_contadora)
         while n>=-5:
             posicion= lista_contadora_copia.index(lista_ventas[n])
             producto=lifestore_products_copia[posicion]
             categoria=lifestore_products_copia[posicion][3]
             print(x, '.- ', categoria, '| ', producto[1][:20], 'se vendió', lista_ventas[n], 'veces.')
-            lista_contadora_copia.pop(posicion)
+            lista_contadora_copia.pop(posicion)#donde se elimina el elemento
             lifestore_products_copia.pop(posicion)
             n-=1
             x+=1
@@ -154,7 +152,7 @@ if username==USUARIO:
         #print(ventas_producto_mensuales) #es una lista que tiene dentro 12 listas que representan cada mes y en cada una de ellas la cantidad de veces que se repite el id de los productos.
 
 
-        #Ventas ENERO
+        #Ventas ENERO, esto se hace con todos los meses
         print('\nVentas ENERO')
         venta_productos_mensuales_copia=list(ventas_producto_mensuales[0]) #hacemos copia de ventas_productos_mensulaes el mes de enero
         ventas_mayores=sorted(venta_productos_mensuales_copia,reverse=True) #ordenamos la lista de mayor a menor
@@ -172,14 +170,14 @@ if username==USUARIO:
         n=-1
         lifestore_products_copia=list(lifestore_products)
         while n>=-5:
-            posicion= ventas_producto_mensuales[0].index(productos_vendidos_ordenados[n])
+            posicion= ventas_producto_mensuales[0].index(productos_vendidos_ordenados[n])#obtenemos el indice para saber el id del producto
             producto=lifestore_products_copia[posicion]
             print(x, '.- ', producto[3],'|', producto[1][:20], 'se vendió', productos_vendidos_ordenados[n], 'veces.')
-            ventas_producto_mensuales[0].pop(posicion)
+            ventas_producto_mensuales[0].pop(posicion)#se elimina el indice para que si se repite el numero lo aparezca el mismo producto
             lifestore_products_copia.pop(posicion)
             n-=1
             x+=1
-        print('\nDe los productos vendidos los 5 menos vendidos fueron: ')
+        print('\nDe los productos vendidos los 5 menos vendidos fueron: ')#se hace lo mismo que con los más vendidos
         venta_productos_mensuales_copia=list(venta_productos_mensuales_copia)
         n=0
         lifestore_products_copia=list(lifestore_products)
@@ -609,7 +607,7 @@ if username==USUARIO:
         busquedas=[ ]
         id_producto=1
 
-
+    #se hace un bucle buscando todos los productos que hayan sido buscados agregandolos a una lista nueva
         while id_producto<=96:
             for busqueda in lifestore_searches: 
                 posicion=busqueda[1]
@@ -621,11 +619,11 @@ if username==USUARIO:
         #print (busquedas)    
 
         productos_buscados=[ ]   
-        for busqueda in busquedas: #hacemos un bucle para detectar las ventas diferentes a 0 y no tomarlas en cuenta
+        for busqueda in busquedas: #hacemos un bucle para detectar las busquedas diferentes a 0 y no tomarlas en cuenta
             if busqueda!=0:
-                productos_buscados.append(busqueda)#se agrega todo producto que se haya vendido 1 o más veces
-        productos_buscados_ordenados=sorted(productos_buscados)#se ordenan de menor a mayor para sacar los menos vendidos 
-        cantidad_de_busquedas=sum(productos_buscados)#se suman las ventas de cada producto para obtener las ventas totales del    
+                productos_buscados.append(busqueda)#se agrega todo producto que se haya buscado al menos 1 vez
+        productos_buscados_ordenados=sorted(productos_buscados)#se ordenan de menor a mayor para sacar los menos buscados 
+        cantidad_de_busquedas=sum(productos_buscados)#se suman las busquedas de cada producto para obtener las busquedas totales 
         busquedas_totales=sum(productos_buscados)
 
         print('\nSe realizaron ', busquedas_totales, 'busquedas de ', len(productos_buscados), 'productos buscados')
@@ -835,8 +833,7 @@ if username==USUARIO:
             ganancia_del_mes = 0
             for id_venta in venta_mensual:
                 indice_de_venta = id_venta - 1
-                # El error era cambiar la lista de aqui: de 'ventas' 
-                # a 'lifestore_sales'
+             
                 info_de_venta = lifestore_sales[indice_de_venta]
 
                 id_prod = info_de_venta[1]
